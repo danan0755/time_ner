@@ -12,20 +12,20 @@ timeBase = arrow.now()
 
 res = tn.parse(target=u'2013年二月二十八日下午四点三十分二十九秒', timeBase=timeBase)  # target为待分析语句，timeBase为基准时间默认是当前时间
 print(res)
-# {"type": "timespan", "timetype": 0, "timespan": ["2013-02-28 16:30:29"]}
+{"type": "timespan", "timetype": 0, "timespan": ["2013-02-28 16:30:29"]}
 
 res = tn.parse(target=u'下午3点到5点')
 print(res)
-# {"type": "timespan", "timespan": ["2020-09-05 15:00:00", "2020-09-05 17:00:00"]}
+{"type": "timespan", "timespan": ["2020-09-05 15:00:00", "2020-09-05 17:00:00"]}
 
 res = tn.parse(target='早上', timeBase=timeBase)
 print(res)
-#  {"type": "timestamp", "timestamp": "2020-09-05", "timetype": -2}
+{"type": "timestamp", "timestamp": "2020-09-05", "timetype": -2}
 
 res = tn.parse(target='今天0点', timeBase=timeBase)
 print(res)
-# {"type": "timestamp", "timestamp": "2020-09-05 00:00:00"}
+{"type": "timestamp", "timestamp": "2020-09-05 00:00:00"}
 
 res = tn.parse(target='今天24点', timeBase=timeBase)
 print(res)
-# {"type": "timestamp", "timestamp": "2020-09-06 00:00:00"}
+{"type": "timestamp", "timestamp": "2020-09-06 00:00:00"}
