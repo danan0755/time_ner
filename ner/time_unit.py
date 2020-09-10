@@ -215,6 +215,13 @@ class TimeUnit:
         pattern = re.compile(rule)
         match = pattern.search(self.exp_time)
         if match is not None:
+            # if self.tp.tunit[3] == -1:  # 增加对没有明确时间点，只写了“早上/早晨/早间”这种情况的处理
+            #     self.tp.tunit[3] = RangeTimeEnum.early_morning
+            #     # 处理倾向于未来时间的情况
+            # elif 12 <= self.tp.tunit[3] <= 23:
+            #     self.tp.tunit[3] -= 12
+            # elif self.tp.tunit[3] == 0:
+            #     self.tp.tunit[3] = 12
             if self.tp.tunit[3] == -1:
                 self.time_type = -2  # -2代表凌晨，早上
             self.preferFuture(3)
@@ -224,6 +231,10 @@ class TimeUnit:
         pattern = re.compile(rule)
         match = pattern.search(self.exp_time)
         if match is not None:
+            # if 0 <= self.tp.tunit[3] <= 10:
+            #     self.tp.tunit[3] += 12
+            # if self.tp.tunit[3] == -1:  # 增加对没有明确时间点，只写了“中午/午间”这种情况的处理
+            #     self.tp.tunit[3] = RangeTimeEnum.noon
             if self.tp.tunit[3] == -1:
                 self.time_type = -3  # -3代表中午
             # 处理倾向于未来时间的情况
@@ -235,11 +246,13 @@ class TimeUnit:
         pattern = re.compile(rule)
         match = pattern.search(self.exp_time)
         if match is not None:
-            if 0 <= self.tp.tunit[3] <= 11:
+            if 0 < self.tp.tunit[3] <= 11:
                 self.tp.tunit[3] += 12
             elif self.tp.tunit[3] == 12:
                 self.tp.tunit[3] = 0
-                self.tp.tunit[2] += 1
+                self.tp.tunit[2] += 1 # 天数加一
+            # elif self.tp.tunit[3] == -1:  # 增加对没有明确时间点，只写了“下午|午后”这种情况的处理
+            #     self.tp.tunit[3] = RangeTimeEnum.lateNight
             elif self.tp.tunit[3] == -1:
                 self.time_type = -4  # -3代表下午，晚上
             # 处理倾向于未来时间的情况
